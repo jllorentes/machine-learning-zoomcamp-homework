@@ -1,3 +1,3 @@
 # machine-learning-zoomcamp-homework
 
-try
+Macine Learning Zoomcamp homework project
