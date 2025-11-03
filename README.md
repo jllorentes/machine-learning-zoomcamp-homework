@@ -2,4 +2,4 @@
 
 Macine Learning Zoomcamp 2025 homework project
 
-urlÑ https://github.com/DataTalksClub/machine-learning-zoomcamp
+url: https://github.com/DataTalksClub/machine-learning-zoomcamp
