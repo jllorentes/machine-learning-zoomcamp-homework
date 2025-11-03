@@ -1,3 +1,3 @@
 # machine-learning-zoomcamp-homework
 
-Macine Learning Zoomcamp homework project
+Macine Learning Zoomcamp 2025 homework project
