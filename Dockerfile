@@ -8,14 +8,16 @@ RUN apt-get update && apt-get install -y \
 # Crear directorio de trabajo
 WORKDIR /workspace
 
-# Copy dependencies
+# Copiar archivos de dependencias primero para aprovechar la cache
 COPY pyproject.toml .
+COPY uv.lock .
 
 # Install uv
 RUN pip install uv
 
 # Install dependencies
-RUN uv pip install --system -r pyproject.toml
+# RUN uv pip install --system -r pyproject.toml
+RUN uv pip install --system .
 
 # Exponer puerto de Jupyter
 EXPOSE 8888
