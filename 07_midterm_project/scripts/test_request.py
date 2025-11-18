@@ -80,11 +80,11 @@ record_2 = {'marital_status': 'single',
   # 'target': 0
 
 r = requests.post(url, json=record_1)
-print("STATUS:", r.status_code)
-print("TEXT:", r.text)
+# print("STATUS:", r.status_code)
+# print("TEXT:", r.text)
 
 response_1 = r.json()
-print(response_1)
+print('response student 1, expected prediction=1', response_1)
 
 response_2 = requests.post(url, json=record_2).json()
-print(response_2)
+print('response student 2, expected prediction=0', response_2)
