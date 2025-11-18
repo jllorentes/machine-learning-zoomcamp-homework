@@ -1,129 +1,71 @@
-🎯 Midterm Project — Predicting Student Dropout and Academic Success
-1. 🧩 Problem Description
-Contexto
+# 🎯 Midterm Project — Predicting Student Dropout and Academic Success
 
-El abandono universitario es uno de los principales desafíos en educación superior. Predecir de manera temprana qué estudiantes tienen mayor riesgo de abandonar puede ayudar a las instituciones a tomar medidas preventivas, ofreciendo apoyo académico o financiero.
+## 1. 🧩 Problem Description
 
-Objetivo
+### Context
 
-Desarrollar un modelo de Machine Learning capaz de predecir si un estudiante terminará graduándose, continuará matriculado o abandonará los estudios, utilizando datos académicos, demográficos y socioeconómicos.
+University dropout is one of the main challenges in higher education. Being able to predict early on which students are at higher risk of dropping out can help institutions take preventive actions by offering academic or financial support.
 
-Dataset
+### Objective
 
-Fuente: UCI Machine Learning Repository – Predict Students Dropout and Academic Success
+Develop a Machine Learning model capable of predicting whether a student will eventually graduate or drop out, using academic, demographic, and socioeconomic data.
 
-Tamaño: 4 424 registros
+### Dataset
 
-Features: 35 variables (edad, género, notas, becas, tipo de curso, situación económica, etc.)
+- **Source:** UCI Machine Learning Repository – Predict Students Dropout and Academic Success  
+- **Size:** 4,424 records  
+- **Features:** 35 variables (age, gender, grades, scholarships, type of course, economic situation, etc.)  
+- **Target:** `Target` (categories: Dropout, Enrolled, Graduate). It will be simplfied to Dropout or not Dropout
 
-Target: Target (categorías: Dropout, Enrolled, Graduate)
+---
 
-2. 📊 Exploratory Data Analysis (EDA)
-Objetivos del EDA
+## 2. 📊 Exploratory Data Analysis (EDA)
 
-Analizar la distribución de la variable objetivo (balance de clases).
+### EDA goals
 
-Identificar correlaciones entre rendimiento académico y abandono.
+- Analyze the distribution of the target variable (class balance).  
+- Identify correlations between numerical features and dropout.  
+- Explore the impact of socioeconomic variables (e.g., scholarships, age, employment).  
+- Detect missing or outlier values.  
 
-Explorar el impacto de variables socioeconómicas (por ejemplo, becas, edad, empleo).
+## 3. ⚙️ Data Preparation
 
-Detectar valores faltantes o atípicos.
+#### Data cleaning
 
-Ejemplos de gráficos útiles
+- Handle NaNs.  
+- Convert categorical variables (e.g., `gender`, `course`) to numeric using `OneHotEncoder` or `DictVectorizer`.  
 
-countplot del target (distribución Dropout / Enrolled / Graduate)
+## 4. 🤖 Model Training and Evaluation
 
-boxplot de notas finales vs target
+### Models to try
 
-heatmap de correlaciones
+- Logistic Regression
+- Random Forest Classifier  
+- XGBoost 
 
-barplot de tasa de abandono por género o tipo de curso
+### Metrics
 
-3. ⚙️ Data Preparation
-Posibles pasos
+- ROC-AUC
 
-Limpieza de datos:
+### Validation
 
-Manejar NaN o valores extremos.
+- `train_validation_test_split` (60/20/20)  
 
-Convertir variables categóricas (e.g., “gender”, “course”) a numéricas con OneHotEncoder o DictVectorizer.
+---
 
-Feature engineering:
+## 5. 📦 Export and Deployment
 
-Crear variables derivadas como:
+### Export the model
 
-Promedio de notas de primer año.
+- Using `pickle` to save the final model.  
+- Save the preprocessor.  
 
-Ratio de asignaturas aprobadas/reprobadas.
+### Create a web service
 
-Variables binarias de apoyo económico.
+- `app.py` script using FastAPI.  
 
-Normalización / estandarización:
+### Run the Endpoint with Docker
 
-Escalar variables numéricas si usas modelos sensibles (p. ej. regresión logística, SVM).
-
-4. 🤖 Model Training and Evaluation
-Modelos a probar
-
-Regresión Logística Multiclase (baseline)
-
-Random Forest Classifier
-
-XGBoost / LightGBM
-
-(Opcional) Support Vector Machine si los datos están bien escalados
-
-Métricas recomendadas
-
-Accuracy (para comparar modelos)
-
-F1-score macro (para evitar sesgos por clases desbalanceadas)
-
-Confusion Matrix
-
-ROC-AUC por clase (si usas binarización)
-
-Validación
-
-train_test_split (70/30 o 80/20)
-
-Validación cruzada (cross_val_score) o GridSearchCV para tuning de hiperparámetros.
-
-5. 🧪 Model Selection and Interpretation
-
-Escoge el mejor modelo en base a F1-macro o balanced accuracy.
-
-Interpreta feature importances o SHAP values:
-
-¿Qué variables influyen más en el abandono?
-
-¿Factores financieros o académicos?
-
-Discute las implicaciones educativas:
-
-Cómo podría usarse este modelo en una universidad para detectar riesgo.
-
-6. 📦 Export and Deployment
-Exportar modelo
-
-Usa joblib o pickle para guardar el modelo final (model.pkl).
-
-Guarda también el preprocesador (dv.pkl si usas DictVectorizer).
-
-Crear servicio web
-
-Escribe un script predict.py o app.py con Flask o FastAPI:
-
-
-
-
-
-
-
-
-
-
-
-Para ejecutar el Docker
+```bash
 docker build -t student-model .
 docker run -p 8000:8000 student-model
