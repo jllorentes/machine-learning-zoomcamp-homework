@@ -21,7 +21,7 @@ Develop a Machine Learning model capable of predicting whether a student will ev
 
 ## 2. 📊 Exploratory Data Analysis (EDA)
 As I dont like really much the Github codespace, I created a container to run jupyter notebooks locally, managing all the dependencies.
-You can find the docker-compose in the root folder of the repository. Just running that container, you will have all the dependencies isntalled to run the notebook without isntalling anything inside the notebook.
+You can find the docker-compose in the root folder of the repository. Just running that container, you will have all the dependencies isntalled to run the notebook without isntalling anything inside the notebook. 
 
 ### EDA goals
 
