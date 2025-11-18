@@ -51,7 +51,7 @@ You can find the docker-compose in the root folder of the repository. Just runni
 
 ### Validation
 
-- `train_validation_test_split` (60/20/20)  
+- `train/validation/test split` (60/20/20)  
 
 ---
 
