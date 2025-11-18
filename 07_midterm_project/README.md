@@ -20,6 +20,8 @@ Develop a Machine Learning model capable of predicting whether a student will ev
 ---
 
 ## 2. 📊 Exploratory Data Analysis (EDA)
+As I dont like really much the Github codespace, I created a container to run jupyter notebooks locally, managing all the dependencies.
+You can find the docker-compose in the root folder of the repository. Just running that container, you will have all the dependencies isntalled to run the notebook without isntalling anything inside the notebook.
 
 ### EDA goals
 
@@ -60,12 +62,26 @@ Develop a Machine Learning model capable of predicting whether a student will ev
 - Using `pickle` to save the final model.  
 - Save the preprocessor.  
 
-### Create a web service
+### Web service
 
 - `app.py` script using FastAPI.  
 
+### Create the model from a script
+To avoid installing all the dependencies, and managing venvs, I created a container to run the script to generate the model
+As I did this in a computer w/o docker and with Podman installed (an open source and free container management tool), the isntructions to run and create the model (the docker ones should be the same):
+
+From the folder 07_midterm_project:
+```bash
+podman compose -f docker-compose.train.yml up --build
+```
+as an output the data would be downloaded and the model created in the folder model/
+
+PS. if you clone the repo, you would have the folder script created, otherwise you should create it and putting there the train.py file.
+
 ### Run the Endpoint with Docker
+As I said, I finished earlier in a different computer with Docker installed the deployment of the model in a container, so once cloned the repo, go to the 07_midterm_project and run the Dockerfile
 
 ```bash
 docker build -t student-model .
 docker run -p 8000:8000 student-model
+```

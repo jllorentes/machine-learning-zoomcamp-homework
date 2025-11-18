@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  ml-train:
+    build:
+      context: .
+      dockerfile: Dockerfile.train
+    image: student-dropout-train:latest
+    container_name: student-dropout-train
+    working_dir: /app
+    command: python scripts/train.py
+    volumes:
+      - .:/app
