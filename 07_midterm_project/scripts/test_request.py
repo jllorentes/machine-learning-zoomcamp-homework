@@ -79,8 +79,11 @@ record_2 = {'marital_status': 'single',
   'gdp': 0.79}
   # 'target': 0
 
+r = requests.post(url, json=record_1)
+print("STATUS:", r.status_code)
+print("TEXT:", r.text)
 
-response_1 = requests.post(url, json=record_1).json()
+response_1 = r.json()
 print(response_1)
 
 response_2 = requests.post(url, json=record_2).json()

@@ -9,14 +9,17 @@ WORKDIR /app
 COPY pyproject.toml .
 
 # Install dependencies
-RUN uv pip install --system -r pyproject.toml
+# RUN uv pip install --system -r pyproject.toml
+RUN uv pip install --system .
 
-# Copy model and app
-COPY pipeline_v1.bin .
-COPY app.py .
+
+# Copy application code
+COPY model/xboost_model.bin .
+COPY scripts/app.py .
 
 # Expo port FastAPI
 EXPOSE 8000
+
 
 # Execute uvicorn
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]

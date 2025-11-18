@@ -1,36 +1,22 @@
-import pickle
-import numpy as np
-import sklearn
+from fastapi import FastAPI
+import joblib
 
-from flask import Flask, request, jsonify
+app = FastAPI()
 
-def predict_drop(alumn, dv, model):
-    X = dv.transform([alumn])
-    y_pred = model.predict(X)
-    return y_pred[0]
+model = joblib.load("xboost_model.bin")
+# si usas DictVectorizer o Pipeline, cargarlo también
 
+@app.get("/")
+def home():
+    return {"status": "ok"}
 
-with open('xboost_model.bin', 'rb') as f_in:
-    dv, model = pickle.load(f_in)
-
-
-app = Flask('dropout')
-
-
-@app.route('/predict', methods=['POST'])
-def predict():
-    alumn = request.get_json()
-
-    prediction = predict_drop(alumn, dv, model)
-    dropout = prediction >= 0.5
-    
-    result = {
-        'dropout_probability': float(prediction),
-        'dropout': bool(dropout),
+@app.post("/predict")
+def predict(student: dict):
+    # transformar features
+    # X = dv.transform([student])
+    # pred = model.predict(X)[0]
+    # proba = model.predict_proba(X)[0][1]
+    return {
+        "prediction": int(pred),
+        "probability": float(proba)
     }
-
-    return jsonify(result)
-
-
-if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0', port=9696)

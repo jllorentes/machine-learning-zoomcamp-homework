@@ -12,7 +12,7 @@ COPY pyproject.toml .
 RUN uv pip install --system -r pyproject.toml
 
 # Copy model and app
-COPY model/pipeline_v1.bin .
+COPY model/xboost_model.bin .
 COPY scripts/app.py .
 
 # Expo port FastAPI
