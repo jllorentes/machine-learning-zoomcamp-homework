@@ -17,4 +17,5 @@ dependencies = [
     "xgboost>=2.0.0",
     "wget>=3.2",
     "unidecode",
+    "tqdm",
 ]
