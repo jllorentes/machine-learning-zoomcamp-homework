@@ -81,7 +81,24 @@ PS. if you clone the repo, you would have the folder script created, otherwise y
 ### Run the Endpoint with Docker
 As I said, I finished earlier in a different computer with Docker installed the deployment of the model in a container, so once cloned the repo, go to the 07_midterm_project and run the Dockerfile
 
+with Docker:
 ```bash
 docker build -t student-model .
 docker run -p 8000:8000 student-model
+```
+
+with Podman:
+```bash
+podman build -t student-model .
+podman run -p 8000:8000 student-model
+```
+
+to test with the script test_request.py. Go to folder 07_midterm_project and then create a light venv:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+
+pip install requests
+python scripts/test_request.py
 ```

@@ -1,22 +1,19 @@
 FROM agrigorev/zoomcamp-model:2025
 
-# Install uv
-RUN pip install uv
-
 WORKDIR /app
 
-# Copy dependencies
-COPY pyproject.toml .
+# Copiar dependencias
+COPY requirements_deployemnt.txt .
 
-# Install dependencies
-RUN uv pip install --system -r pyproject.toml
+# Instalar dependencias
+RUN pip install --no-cache-dir -r requirements_deployemnt.txt
 
-# Copy model and app
+# Copiar modelo y app
 COPY model/xboost_model.bin .
 COPY scripts/app.py .
 
-# Expo port FastAPI
+# Exponer puerto FastAPI
 EXPOSE 8000
 
-# Execute uvicorn
+# Ejecutar uvicorn
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
