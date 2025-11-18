@@ -1,30 +1,14 @@
 import pickle
+import sklearn
+
+file_path = "../model/xboost_model.bin"
 
 # Load Pipeline
-with open('xboost_model.bin', 'rb') as f:
-    model = pickle.load(f)
-
-
-
-# Calcular probabilidad de conversión
-proba = model.predict_proba([record])[0, 1]
-
-print(f"Probability of dropout: {proba:.3f}")
-
-def predict_drop(alumn, dv, model):
-    X = dv.transform([alumn])
-    y_pred = model.predict(X)
-    return y_pred[0]
-
-
-with open('xboost_model.bin', 'rb') as f_in:
-    dv, model = pickle.load(f_in)
-
-
-
+with open(file_path, 'rb') as f:
+    dv, model = pickle.load(f)
 
 # Registro a evaluar
-record = {'marital_status': 'single',
+record_1 = {'marital_status': 'single',
   'application_mode': '2nd_phase_general_contingent',
   'application_order': 5,
   'course': 'animation_and_multimedia_design',
@@ -59,5 +43,59 @@ record = {'marital_status': 'single',
   'curricular_units_2nd_sem_without_evaluations': 0,
   'unemployment_rate': 10.8,
   'inflation_rate': 1.4,
-  'gdp': 1.74,
-  'target': 1}
+  'gdp': 1.74}
+# target = 1
+
+record_2 = {'marital_status': 'single',
+  'application_mode': 'international_student_bachelor',
+  'application_order': 1,
+  'course': 'tourism',
+  'daytime_evening_attendance': 'daytime',
+  'previous_qualification': 'secondary_education',
+  'previous_qualification_grade': 160.0,
+  'nacionality': 'portuguese',
+  'mother_s_qualification': 'secondary_education_12th_year_of_schooling_or_eq',
+  'father_s_qualification': 'higher_education_degree',
+  'mother_s_occupation': 'intermediate_level_technicians_and_professions',
+  'father_s_occupation': 'intermediate_level_technicians_and_professions',
+  'admission_grade': 142.5,
+  'displaced': 'yes',
+  'educational_special_needs': 'no',
+  'debtor': 'no',
+  'tuition_fees_up_to_date': 'no',
+  'gender': 'male',
+  'scholarship_holder': 'no',
+  'age_at_enrollment': 19,
+  'international': 'no',
+  'curricular_units_1st_sem_credited': 0,
+  'curricular_units_1st_sem_enrolled': 6,
+  'curricular_units_1st_sem_evaluations': 6,
+  'curricular_units_1st_sem_approved': 6,
+  'curricular_units_1st_sem_grade': 14.0,
+  'curricular_units_1st_sem_without_evaluations': 0,
+  'curricular_units_2nd_sem_credited': 0,
+  'curricular_units_2nd_sem_enrolled': 6,
+  'curricular_units_2nd_sem_evaluations': 6,
+  'curricular_units_2nd_sem_approved': 6,
+  'curricular_units_2nd_sem_grade': 13.666666666666666,
+  'curricular_units_2nd_sem_without_evaluations': 0,
+  'unemployment_rate': 13.9,
+  'inflation_rate': -0.3,
+  'gdp': 0.79}
+  # 'target': 0
+
+
+def predict_drop(alumn, dv, model):
+    X = dv.transform([alumn])
+    y_pred = model.predict(X)
+    return y_pred[0]
+
+# Calcular probabilidad de conversión
+proba = predict_drop(record_1, dv, model)
+
+print(f"Probability of dropout record_1: {proba:.3f}")
+
+proba = predict_drop(record_2, dv, model)
+
+print(f"Probability of dropout record_2: {proba:.3f}")
+

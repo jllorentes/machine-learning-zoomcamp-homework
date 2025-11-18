@@ -1,5 +1,6 @@
 import pickle
 import numpy as np
+import sklearn
 
 from flask import Flask, request, jsonify
 
@@ -21,11 +22,11 @@ def predict():
     alumn = request.get_json()
 
     prediction = predict_drop(alumn, dv, model)
-    churn = prediction >= 0.5
+    dropout = prediction >= 0.5
     
     result = {
         'dropout_probability': float(prediction),
-        'dropout': bool(churn),
+        'dropout': bool(dropout),
     }
 
     return jsonify(result)
