@@ -20,8 +20,18 @@ Develop a Machine Learning model capable of predicting whether a student will ev
 ---
 
 ## 2. 📊 Exploratory Data Analysis (EDA)
-As I dont like really much the Github codespace, I created a container to run jupyter notebooks locally, managing all the dependencies.
-You can find the docker-compose in the root folder of the repository. Just running that container, you will have all the dependencies isntalled to run the notebook without isntalling anything inside the notebook. 
+As I dont like really much the Github codespace (and after this last days with issues in GitHub the less), I created a container to run jupyter notebooks locally, managing all the dependencies.
+You can find the docker-compose in the root folder of the repository. Just running that container, you will have all the dependencies isntalled to run the notebook without installing anything inside the notebook. From the repo root folder:
+
+Podman:
+```bash
+podman compose -f docker-compose.yml up --build
+```
+
+Docker:
+```bash
+docker compose -f docker-compose.yml up --build
+```
 
 ### EDA goals
 
@@ -68,18 +78,24 @@ You can find the docker-compose in the root folder of the repository. Just runni
 
 ### Create the model from a script
 To avoid installing all the dependencies, and managing venvs, I created a container to run the script to generate the model
-As I did this in a computer w/o docker and with Podman installed (an open source and free container management tool), the isntructions to run and create the model (the docker ones should be the same):
+As I did this in a computer w/o docker and with Podman installed (an open source and free container management tool), the way to run the container to create the model:
 
 From the folder 07_midterm_project:
+Podman:
 ```bash
 podman compose -f docker-compose.train.yml up --build
+```
+
+Docker:
+```bash
+docker compose -f docker-compose.train.yml up --build
 ```
 as an output the data would be downloaded and the model created in the folder model/
 
 PS. if you clone the repo, you would have the folder script created, otherwise you should create it and putting there the train.py file.
 
 ### Run the Endpoint with Docker
-As I said, I finished earlier in a different computer with Docker installed the deployment of the model in a container, so once cloned the repo, go to the 07_midterm_project and run the Dockerfile
+As I said, I finished earlier in a different computer with Docker installed the deployment of the model in a container (so tested in both Podman and Docker), so once cloned the repo, go to the 07_midterm_project and run the Dockerfile
 
 with Docker:
 ```bash
@@ -101,4 +117,35 @@ source .venv/bin/activate
 
 pip install requests
 python scripts/test_request.py
+```
+
+or you can do with a full virtual environment to do so, first install UV (Mac/Linux):
+
+```bash
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+Windows (PowerShell):
+```bash
+powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+Activate the virtual environment:
+Mac / Linux:
+```bash
+source .venv/bin/activate
+```
+
+Windows (PowerShell):
+```bash
+.venv\Scripts\Activate.ps1
+```
+
+then Install dependencies:
+```bash
+pip install -r requirements.txt
+```
+
+And finally execute the script
+```bash
+python test_request.py
 ```
