@@ -49,10 +49,11 @@ docker compose -f docker-compose.yml up --build
 
 ## 4. 🤖 Model Training and Evaluation
 
-### Models to try
+### Models tried
 
 - Logistic Regression
-- Random Forest Classifier  
+- Decision Tree
+- Random Forest  
 - XGBoost 
 
 ### Metrics
@@ -69,8 +70,7 @@ docker compose -f docker-compose.yml up --build
 
 ### Export the model
 
-- Using `pickle` to save the final model.  
-- Save the preprocessor.  
+- Used `pickle` to save the final model and the the preprocessor.  
 
 ### Web service
 
@@ -90,7 +90,7 @@ Docker:
 ```bash
 docker compose -f docker-compose.train.yml up --build
 ```
-as an output the data would be downloaded and the model created in the folder model/
+as an output the data would be downloaded and the model created in the folder model/, and the data set in the folder data/.
 
 PS. if you clone the repo, you would have the folder script created, otherwise you should create it and putting there the train.py file.
 
